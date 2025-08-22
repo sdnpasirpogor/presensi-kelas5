@@ -12,21 +12,28 @@
     <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
     <style>
         :root {
-            --blue-primary: #4ECDC4;
-            --blue-secondary: #6ECBF5;
-            --yellow-primary: #FFD166;
-            --green-primary: #06D6A0;
-            --pink-primary: #EF476F;
-            --purple-primary: #9D4EDD;
+            --primary-blue: #1e40af;
+            --secondary-teal: #0891b2;
+            --accent-green: #059669;
+            --light-green: #10b981;
+            --soft-blue: #3b82f6;
             --white: #ffffff;
-            --light-gray: #f8f9fa;
-            --text-dark: #333333;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --success: #06D6A0;
-            --error: #EF476F;
-            --warning: #FFD166;
-            --gradient-bg: linear-gradient(135deg, #4ECDC4, #6ECBF5);
-            --gradient-header: linear-gradient(135deg, #4ECDC4, #06D6A0);
+            --off-white: #f8fafc;
+            --light-gray: #f1f5f9;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --shadow-light: rgba(15, 23, 42, 0.08);
+            --shadow-medium: rgba(15, 23, 42, 0.12);
+            --shadow-heavy: rgba(15, 23, 42, 0.25);
+            --success: #059669;
+            --error: #dc2626;
+            --warning: #d97706;
+            --info: #0891b2;
+            --gradient-primary: linear-gradient(135deg, #1e40af, #0891b2);
+            --gradient-header: linear-gradient(135deg, #1e40af, #0891b2);
+            --gradient-accent: linear-gradient(135deg, #059669, #10b981);
+            --border-color: #e2e8f0;
+            --hover-bg: #f1f5f9;
         }
 
         * {
@@ -36,27 +43,28 @@
         }
 
         body {
-            font-family: 'Nunito', sans-serif;
-            background: var(--gradient-bg);
+            font-family: 'Inter', 'Nunito', sans-serif;
+            background: var(--gradient-primary);
             color: var(--text-dark);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='9' cy='9' r='9'/%3E%3Ccircle cx='49' cy='49' r='9'/%3E%3Ccircle cx='9' cy='49' r='9'/%3E%3Ccircle cx='49' cy='9' r='9'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         .app-container {
             width: 100%;
             max-width: 1200px;
             background-color: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px var(--shadow-heavy);
             overflow: hidden;
             position: relative;
             min-height: 85vh;
             animation: fadeIn 0.8s ease-out;
+            border: 1px solid var(--border-color);
         }
 
         @keyframes fadeIn {
@@ -73,71 +81,70 @@
 
         .header {
             background: var(--gradient-header);
-            padding: 20px;
+            padding: 32px 24px;
             text-align: center;
             position: relative;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.1);
         }
 
         .logo {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--yellow-primary), var(--purple-primary));
+            width: 80px;
+            height: 80px;
+            background: var(--white);
             border-radius: 50%;
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 40px;
-            color: var(--white);
-            box-shadow: 0 4px 10px var(--shadow);
-            animation: pulse 2s infinite;
+            font-size: 32px;
+            color: var(--primary-blue);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+            animation: pulse 3s infinite;
         }
 
         @keyframes pulse {
-            0% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
 
             50% {
                 transform: scale(1.05);
             }
-
-            100% {
-                transform: scale(1);
-            }
         }
 
         .school-name {
             font-size: 28px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--white);
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            text-shadow: none;
         }
 
         .subtitle {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 500;
             color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 0.5px;
         }
 
         .slide-container {
             display: none;
-            padding: 20px;
+            padding: 32px 24px;
             min-height: 65vh;
         }
 
         .slide-container.active {
             display: block;
-            animation: slideIn 0.2s ease-out;
+            animation: slideIn 0.3s ease-out;
         }
 
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(10px);
             }
 
             to {
@@ -147,19 +154,19 @@
         }
 
         .login-form {
-            max-width: 400px;
-            margin: 30px auto;
-            padding: 30px;
+            max-width: 420px;
+            margin: 40px auto;
+            padding: 40px;
             background-color: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow-light);
             animation: scaleIn 0.6s ease-out;
-            border: 2px solid var(--blue-primary);
+            border: 1px solid var(--border-color);
         }
 
         @keyframes scaleIn {
             from {
-                transform: scale(0.9);
+                transform: scale(0.95);
                 opacity: 0;
             }
 
@@ -170,7 +177,7 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             position: relative;
         }
 
@@ -178,23 +185,26 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #555;
+            color: var(--text-dark);
+            font-size: 14px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--blue-secondary);
-            border-radius: 10px;
+            padding: 16px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
             font-size: 16px;
-            transition: all 0.3s;
-            background-color: rgba(110, 203, 245, 0.1);
+            transition: all 0.3s ease;
+            background-color: var(--off-white);
+            color: var(--text-dark);
         }
 
         .form-group input:focus {
-            border-color: var(--purple-primary);
+            border-color: var(--primary-blue);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.2);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+            background-color: var(--white);
         }
 
         .password-container {
@@ -203,45 +213,45 @@
 
         .toggle-password {
             position: absolute;
-            right: 15px;
-            top: 42px;
+            right: 20px;
+            top: 48px;
             cursor: pointer;
-            color: #777;
+            color: var(--text-gray);
             transition: all 0.3s;
         }
 
         .toggle-password:hover {
-            color: var(--purple-primary);
+            color: var(--primary-blue);
         }
 
         .login-button {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--blue-primary), var(--blue-secondary));
+            padding: 16px;
+            background: var(--gradient-primary);
             color: var(--white);
             border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 700;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
         }
 
         .login-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
         }
 
         .error-message {
             color: var(--error);
             text-align: center;
-            margin-top: 15px;
-            font-weight: 600;
+            margin-top: 16px;
+            font-weight: 500;
             display: none;
             animation: shake 0.5s;
         }
@@ -266,64 +276,65 @@
 
         .footer {
             text-align: center;
-            margin-top: 30px;
-            color: #777;
+            margin-top: 32px;
+            color: var(--text-gray);
             font-size: 14px;
+            font-weight: 500;
         }
 
         .date-display {
             text-align: center;
-            margin: 20px 0;
-            font-size: 18px;
+            margin: 24px 0;
+            font-size: 16px;
             font-weight: 600;
-            color: #555;
-            background-color: var(--light-gray);
-            padding: 15px;
-            border-radius: 15px;
+            color: var(--text-dark);
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(78, 205, 196, 0.3);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            border: 1px solid var(--border-color);
         }
 
         .digital-clock {
             font-size: 32px;
-            font-weight: 800;
-            margin-top: 10px;
-            background: linear-gradient(45deg, var(--blue-primary), var(--green-primary));
-            padding: 10px 20px;
-            border-radius: 10px;
+            font-weight: 700;
+            margin-top: 12px;
+            background: var(--gradient-primary);
+            padding: 12px 24px;
+            border-radius: 12px;
             color: var(--white);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
             display: inline-block;
-            font-family: 'Poppins', sans-serif;
-            animation: pulse 2s infinite;
+            font-family: 'Inter', 'Poppins', sans-serif;
+            animation: pulse 3s infinite;
         }
 
         .action-buttons {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 16px;
+            margin-bottom: 32px;
         }
 
         .action-button {
-            padding: 15px 20px;
-            border-radius: 15px;
+            padding: 16px 24px;
+            border-radius: 12px;
             border: none;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            transition: all 0.3s;
-            font-family: 'Poppins', sans-serif;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            min-width: 200px;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', 'Poppins', sans-serif;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            min-width: 180px;
             color: var(--white);
             position: relative;
             overflow: hidden;
@@ -331,43 +342,41 @@
 
         .action-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-            filter: brightness(1.05);
+            box-shadow: 0 8px 25px var(--shadow-medium);
         }
 
         .action-button:disabled {
-            opacity: 0.7;
+            opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
 
-        /* Warna baru untuk tombol aksi */
         .kelola-siswa {
-            background: linear-gradient(135deg, var(--pink-primary), #EF8CA9);
+            background: linear-gradient(135deg, var(--secondary-teal), var(--soft-blue));
         }
 
         .present-all {
-            background: linear-gradient(135deg, var(--yellow-primary), #FFE58A);
+            background: var(--gradient-accent);
         }
 
         .submit-attendance {
-            background: linear-gradient(135deg, var(--green-primary), #5DE5B4);
+            background: var(--gradient-primary);
         }
 
         .rekap-harian {
-            background: linear-gradient(135deg, var(--blue-secondary), #9BDCF9);
+            background: linear-gradient(135deg, var(--light-green), var(--accent-green));
         }
 
         .rekap-bulanan {
-            background: linear-gradient(135deg, var(--purple-primary), #C08AE8);
+            background: linear-gradient(135deg, var(--soft-blue), var(--secondary-teal));
         }
 
         .export-excel {
-            background: linear-gradient(135deg, #21a366, #107c41) !important;
+            background: linear-gradient(135deg, #059669, #047857) !important;
             color: white !important;
             position: relative;
             overflow: hidden;
-            min-width: 220px;
+            min-width: 200px;
         }
 
         .export-excel:hover::after {
@@ -390,7 +399,7 @@
         .students-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 16px;
         }
 
         @media (min-width: 576px) {
@@ -419,18 +428,18 @@
 
         .student-card {
             background-color: var(--white);
-            border-radius: 15px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            transition: all 0.3s ease;
             animation: popIn 0.4s ease-out;
-            border: 1px solid rgba(110, 203, 245, 0.3);
+            border: 1px solid var(--border-color);
         }
 
         @keyframes popIn {
             0% {
-                transform: scale(0.8);
+                transform: scale(0.9);
                 opacity: 0;
             }
 
@@ -441,99 +450,106 @@
         }
 
         .student-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            border-color: var(--blue-secondary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px var(--shadow-medium);
+            border-color: var(--primary-blue);
         }
 
         .student-avatar {
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--blue-secondary), var(--green-primary));
-            margin: 0 auto 10px;
+            background: var(--gradient-primary);
+            margin: 0 auto 12px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--white);
         }
 
         .student-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 10px;
-            min-height: 40px;
+            margin-bottom: 12px;
+            min-height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+            color: var(--text-dark);
+            line-height: 1.3;
         }
 
         .attendance-status {
             width: 100%;
-            padding: 8px;
+            padding: 10px 12px;
             border-radius: 10px;
-            border: 2px solid var(--blue-secondary);
-            font-size: 14px;
+            border: 2px solid var(--border-color);
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-            background-color: rgba(110, 203, 245, 0.1);
+            transition: all 0.3s ease;
+            background-color: var(--off-white);
+            color: var(--text-dark);
         }
 
         .attendance-status:focus {
-            border-color: var(--purple-primary);
+            border-color: var(--primary-blue);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.2);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+            background-color: var(--white);
         }
 
         .logout-button {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.3);
+            top: 24px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.2);
             border: none;
-            font-size: 20px;
+            font-size: 18px;
             color: var(--white);
             cursor: pointer;
-            transition: all 0.3s;
-            width: 40px;
-            height: 40px;
+            transition: all 0.3s ease;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(10px);
         }
 
         .logout-button:hover {
-            color: var(--yellow-primary);
-            transform: scale(1.1);
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
         }
 
         .date-picker-container {
             display: flex;
             justify-content: center;
-            margin: 15px 0;
-            gap: 10px;
+            margin: 20px 0;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .date-picker {
-            padding: 10px 15px;
-            border: 2px solid var(--blue-secondary);
-            border-radius: 10px;
-            font-size: 16px;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 14px;
             font-weight: 600;
             text-align: center;
-            min-width: 200px;
-            background-color: rgba(110, 203, 245, 0.1);
+            min-width: 180px;
+            background-color: var(--white);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .date-picker:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
         }
 
         /* ============== CUSTOM MODAL DIALOG STYLES ============== */
@@ -544,7 +560,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(15, 23, 42, 0.6);
             z-index: 3000;
             align-items: center;
             justify-content: center;
@@ -568,21 +584,21 @@
 
         .custom-modal-content {
             background: var(--white);
-            padding: 30px;
+            padding: 32px;
             border-radius: 20px;
-            min-width: 300px;
+            min-width: 320px;
             max-width: 90vw;
             max-height: 90vh;
             overflow: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 25px 50px var(--shadow-heavy);
             position: relative;
-            border: 3px solid var(--blue-primary);
+            border: 1px solid var(--border-color);
             animation: modalSlideIn 0.4s ease-out;
         }
 
         @keyframes modalSlideIn {
             from {
-                transform: scale(0.7) translateY(-50px);
+                transform: scale(0.9) translateY(-20px);
                 opacity: 0;
             }
 
@@ -593,7 +609,7 @@
         }
 
         .modal-icon {
-            font-size: 60px;
+            font-size: 48px;
             text-align: center;
             margin-bottom: 20px;
         }
@@ -611,40 +627,40 @@
         }
 
         .modal-icon.info {
-            color: var(--blue-primary);
+            color: var(--info);
         }
 
         .modal-title {
-            font-size: 24px;
-            font-weight: 800;
+            font-size: 22px;
+            font-weight: 700;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
             color: var(--text-dark);
         }
 
         .modal-message {
             font-size: 16px;
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 24px;
             line-height: 1.5;
-            color: #555;
+            color: var(--text-gray);
         }
 
         .modal-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .modal-btn {
-            padding: 12px 25px;
+            padding: 12px 24px;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             min-width: 120px;
             display: flex;
             align-items: center;
@@ -653,47 +669,51 @@
         }
 
         .modal-btn.primary {
-            background: linear-gradient(135deg, var(--green-primary), #5DE5B4);
+            background: var(--gradient-accent);
             color: var(--white);
         }
 
         .modal-btn.secondary {
-            background: linear-gradient(135deg, #ddd, #bbb);
+            background: var(--light-gray);
             color: var(--text-dark);
+            border: 2px solid var(--border-color);
         }
 
         .modal-btn.danger {
-            background: linear-gradient(135deg, var(--pink-primary), #EF8CA9);
+            background: linear-gradient(135deg, var(--error), #ef4444);
             color: var(--white);
         }
 
         .modal-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 20px var(--shadow-medium);
         }
 
         /* ============== TOAST NOTIFICATION STYLES ============== */
         .toast-container {
             position: fixed;
-            top: 30px;
-            right: 30px;
+            top: 24px;
+            right: 24px;
             z-index: 4000;
             max-width: 400px;
         }
 
         .toast {
             background: var(--white);
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-left: 5px solid;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 40px var(--shadow-medium);
+            border-left: 4px solid;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
             transform: translateX(450px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: toastSlideIn 0.5s ease-out forwards;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
         }
 
         @keyframes toastSlideIn {
@@ -715,11 +735,11 @@
         }
 
         .toast.info {
-            border-left-color: var(--blue-primary);
+            border-left-color: var(--info);
         }
 
         .toast-icon {
-            font-size: 24px;
+            font-size: 20px;
             flex-shrink: 0;
         }
 
@@ -728,36 +748,37 @@
         }
 
         .toast-title {
-            font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 4px;
+            color: var(--text-dark);
         }
 
         .toast-message {
             font-size: 14px;
-            color: #666;
+            color: var(--text-gray);
             line-height: 1.4;
         }
 
         .toast-close {
             background: none;
             border: none;
-            font-size: 20px;
-            color: #999;
+            font-size: 18px;
+            color: var(--text-gray);
             cursor: pointer;
-            padding: 5px;
+            padding: 4px;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
         .toast-close:hover {
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: var(--hover-bg);
+            color: var(--text-dark);
         }
 
         .toast-progress {
@@ -765,8 +786,8 @@
             bottom: 0;
             left: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--blue-primary), var(--green-primary));
-            border-radius: 0 0 15px 15px;
+            background: var(--gradient-primary);
+            border-radius: 0 0 12px 12px;
             animation: toastProgress 4s linear forwards;
         }
 
@@ -792,7 +813,7 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(4px);
         }
 
         .loading-overlay.show {
@@ -804,13 +825,13 @@
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--light-gray);
-            border-top: 4px solid var(--blue-primary);
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--primary-blue);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
+            margin: 0 auto 16px;
         }
 
         @keyframes spin {
@@ -827,12 +848,12 @@
             font-size: 16px;
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .loading-dots {
-            font-size: 20px;
-            color: var(--blue-primary);
+            font-size: 18px;
+            color: var(--primary-blue);
             animation: loadingDots 1.5s infinite;
         }
 
@@ -858,10 +879,10 @@
         }
 
         .skeleton-loader {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background: linear-gradient(90deg, var(--light-gray) 25%, var(--border-color) 50%, var(--light-gray) 75%);
             background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-            border-radius: 10px;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
         }
 
         @keyframes shimmer {
@@ -877,18 +898,18 @@
         /* ============== UNDO FEATURE STYLES ============== */
         .undo-bar {
             position: fixed;
-            bottom: 30px;
+            bottom: 24px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: var(--text-dark);
             color: var(--white);
-            padding: 15px 25px;
+            padding: 16px 24px;
             border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 30px var(--shadow-heavy);
             z-index: 2000;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
             font-weight: 600;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -898,21 +919,22 @@
         }
 
         .undo-btn {
-            background: var(--yellow-primary);
-            color: var(--text-dark);
+            background: var(--accent-green);
+            color: var(--white);
             border: none;
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            font-size: 14px;
         }
 
         .undo-btn:hover {
-            background: #FFE58A;
+            background: var(--light-green);
             transform: scale(1.05);
         }
 
@@ -921,7 +943,7 @@
             bottom: 0;
             left: 0;
             height: 3px;
-            background: var(--yellow-primary);
+            background: var(--accent-green);
             border-radius: 0 0 50px 50px;
             animation: undoProgress 5s linear forwards;
         }
@@ -941,16 +963,17 @@
             position: fixed;
             bottom: 20px;
             left: 20px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(30, 41, 59, 0.9);
             color: var(--white);
-            padding: 10px 15px;
-            border-radius: 10px;
+            padding: 12px 16px;
+            border-radius: 12px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             z-index: 1500;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .shortcuts-hint.show {
@@ -960,10 +983,11 @@
 
         .shortcut-key {
             background: rgba(255, 255, 255, 0.2);
-            padding: 2px 6px;
+            padding: 2px 8px;
             border-radius: 4px;
-            font-family: 'Courier New', monospace;
+            font-family: 'Monaco', 'Courier New', monospace;
             font-size: 11px;
+            margin: 0 2px;
         }
 
         /* Rekap modal */
@@ -974,52 +998,50 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(15, 23, 42, 0.5);
             z-index: 2000;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(4px);
         }
 
         .modal.active {
             display: flex;
-            animation: fadeIn 0.3s;
+            animation: fadeIn 0.3s ease-out;
         }
 
         .modal-content {
-            background: #fff;
-            padding: 30px 20px;
-            border-radius: 16px;
-            min-width: 340px;
+            background: var(--white);
+            padding: 32px 24px;
+            border-radius: 20px;
+            min-width: 360px;
             max-width: 95vw;
             max-height: 90vh;
             overflow: auto;
-            box-shadow: 0 10px 30px var(--shadow);
+            box-shadow: 0 25px 50px var(--shadow-heavy);
             position: relative;
-            border: 2px solid var(--blue-primary);
+            border: 1px solid var(--border-color);
         }
 
         .modal-content h2 {
-            font-size: 22px;
-            font-weight: 800;
+            font-size: 24px;
+            font-weight: 700;
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 24px;
             color: var(--text-dark);
-            background: linear-gradient(90deg, var(--blue-primary), var(--green-primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .modal-content .close-modal {
             position: absolute;
-            top: 18px;
-            right: 22px;
-            font-size: 22px;
+            top: 20px;
+            right: 24px;
+            font-size: 24px;
             cursor: pointer;
-            color: #333;
-            transition: all 0.3s;
-            background: rgba(0, 0, 0, 0.05);
-            width: 30px;
-            height: 30px;
+            color: var(--text-gray);
+            transition: all 0.3s ease;
+            background: var(--hover-bg);
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1029,182 +1051,250 @@
         .modal-content .close-modal:hover {
             color: var(--error);
             transform: scale(1.1);
-            background: rgba(239, 71, 111, 0.1);
+            background: rgba(220, 38, 38, 0.1);
         }
 
         .rekap-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 16px;
             font-size: 14px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow-light);
         }
 
         .rekap-table th,
         .rekap-table td {
-            border: 1px solid #eee;
-            padding: 7px;
+            border: 1px solid var(--border-color);
+            padding: 12px 8px;
             text-align: center;
         }
 
         .rekap-table th {
-            background: linear-gradient(135deg, var(--blue-primary), var(--blue-secondary));
+            background: var(--gradient-primary);
             color: var(--white);
             position: sticky;
             top: 0;
-            font-weight: 700;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .rekap-table td {
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        .rekap-table tbody tr:hover {
+            background-color: var(--off-white);
         }
 
         .rekap-controls {
-            margin-bottom: 10px;
+            margin-bottom: 16px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             justify-content: center;
         }
 
         .rekap-controls input,
         .rekap-controls select {
-            padding: 6px 10px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-family: 'Nunito', sans-serif;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            font-family: 'Inter', 'Nunito', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background-color: var(--white);
+            color: var(--text-dark);
+        }
+
+        .rekap-controls input:focus,
+        .rekap-controls select:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .rekap-controls label {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 14px;
         }
 
         .search-container {
-            margin: 10px 0;
+            margin: 16px 0;
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .search-container input {
             flex: 1;
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-family: 'Nunito', sans-serif;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            font-family: 'Inter', 'Nunito', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background-color: var(--white);
+            color: var(--text-dark);
+        }
+
+        .search-container input:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
         }
 
         .status-hadir {
-            background-color: rgba(6, 214, 160, 0.2);
+            background-color: rgba(5, 150, 105, 0.1);
         }
 
         .status-izin {
-            background-color: rgba(110, 203, 245, 0.2);
+            background-color: rgba(8, 145, 178, 0.1);
         }
 
         .status-sakit {
-            background-color: rgba(255, 209, 102, 0.2);
+            background-color: rgba(217, 119, 6, 0.1);
         }
 
         .status-alfa {
-            background-color: rgba(239, 71, 111, 0.2);
+            background-color: rgba(220, 38, 38, 0.1);
         }
 
         .no-data {
             text-align: center;
-            padding: 20px;
-            color: #777;
-            font-weight: 600;
+            padding: 32px;
+            color: var(--text-gray);
+            font-weight: 500;
+            font-size: 16px;
         }
 
         .loading {
             text-align: center;
-            padding: 20px;
-            color: #555;
+            padding: 32px;
+            color: var(--text-dark);
+            font-size: 16px;
         }
 
         .loading i {
-            margin-right: 10px;
+            margin-right: 8px;
+            color: var(--primary-blue);
         }
 
         .info-tanggal {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
             text-align: center;
-            background: var(--light-gray);
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(78, 205, 196, 0.3);
+            background: var(--white);
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+        }
+
+        .info-tanggal i {
+            color: var(--primary-blue);
+            margin-right: 8px;
         }
 
         .app-title {
             text-align: center;
-            margin: 10px 0 20px;
-            font-size: 24px;
+            margin: 0 0 24px;
+            font-size: 22px;
             font-weight: 700;
-            color: #2c3e50;
+            color: var(--text-dark);
             position: relative;
         }
 
         .app-title:after {
             content: '';
             display: block;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--blue-primary), var(--green-primary));
-            margin: 8px auto 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-primary);
+            margin: 10px auto 0;
             border-radius: 2px;
         }
 
         .status-indicator {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             display: inline-block;
-            margin-right: 5px;
+            margin-right: 6px;
         }
 
         .status-hadir-indicator {
-            background-color: var(--green-primary);
+            background-color: var(--success);
         }
 
         .status-izin-indicator {
-            background-color: var(--blue-secondary);
+            background-color: var(--info);
         }
 
         .status-sakit-indicator {
-            background-color: var(--yellow-primary);
+            background-color: var(--warning);
         }
 
         .status-alfa-indicator {
-            background-color: var(--pink-primary);
+            background-color: var(--error);
         }
 
         .progress-bar {
             width: 100%;
-            height: 20px;
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            margin-top: 5px;
+            height: 16px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            margin-top: 6px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--green-primary), var(--blue-primary));
-            border-radius: 10px;
+            background: var(--gradient-accent);
+            border-radius: 8px;
             transition: width 0.5s ease;
         }
 
         /* Mobile responsive adjustments */
         @media (max-width: 768px) {
             .toast-container {
-                top: 20px;
-                right: 20px;
-                left: 20px;
+                top: 16px;
+                right: 16px;
+                left: 16px;
                 max-width: none;
             }
 
             .custom-modal-content {
-                min-width: 280px;
-                padding: 25px;
+                min-width: 300px;
+                padding: 24px;
+                margin: 16px;
             }
 
             .shortcuts-hint {
                 display: none;
+            }
+
+            .action-buttons {
+                gap: 12px;
+            }
+
+            .action-button {
+                min-width: 160px;
+                padding: 14px 20px;
+                font-size: 13px;
+            }
+
+            .header {
+                padding: 24px 20px;
+            }
+
+            .slide-container {
+                padding: 24px 20px;
             }
         }
 
@@ -1213,19 +1303,20 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--green-primary);
+            background: var(--success);
             color: white;
-            padding: 8px 15px;
+            padding: 10px 16px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
             z-index: 1500;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
             opacity: 0;
             transform: translateY(50px);
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-light);
         }
 
         .realtime-indicator.show {
@@ -1238,22 +1329,60 @@
         }
 
         .pulse-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: white;
-            animation: pulse 1.5s infinite;
+            animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
                 transform: scale(1);
             }
+
             50% {
                 opacity: 0.5;
                 transform: scale(1.2);
             }
+        }
+
+        /* Enhanced form elements */
+        .form-group input[type="date"] {
+            background-color: var(--white);
+            color: var(--text-dark);
+        }
+
+        .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.5);
+        }
+
+        /* Better button states */
+        .action-button:active {
+            transform: translateY(-1px);
+        }
+
+        .login-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Improved table styling */
+        .rekap-table tbody tr:nth-child(even) {
+            background-color: rgba(248, 250, 252, 0.5);
+        }
+
+        /* Enhanced card interactions */
+        .student-card:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        /* Better focus states */
+        *:focus-visible {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
         }
     </style>
 </head>
@@ -1399,29 +1528,77 @@
         };
 
         // ================= FUNGSI SUPABASE =================
-        
-        // Load students from Supabase
+
+        // Load students from Supabase dengan handling error yang lebih baik
         async function loadStudentsFromDB() {
             try {
+                showLoading('Memuat daftar siswa...');
+
                 const response = await fetch(`${SUPABASE_REST_URL}/students?select=*&is_active=eq.true&order=nama.asc`, {
                     method: 'GET',
                     headers: SUPABASE_HEADERS
                 });
 
                 if (!response.ok) {
-                    throw new Error('Gagal load siswa dari database');
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
 
                 const data = await response.json();
-                students = data.map(student => student.nama);
-                
-                console.log('Students loaded:', students.length);
-                return students;
+
+                if (Array.isArray(data) && data.length > 0) {
+                    students = data.map(student => student.nama);
+                    console.log('✅ Students loaded from database:', students.length);
+                    hideLoading();
+                    showToast('success', 'Data Siswa Dimuat', `${students.length} siswa berhasil dimuat dari database`);
+                    return students;
+                } else {
+                    throw new Error('Data siswa kosong atau tidak valid');
+                }
+
             } catch (error) {
-                console.error('Error loading students:', error);
-                // Fallback ke data default jika gagal
+                console.error('❌ Error loading students from database:', error);
+                hideLoading();
+
+                // Fallback strategy dengan notifikasi yang jelas
                 students = [...defaultStudents];
-                showToast('warning', 'Fallback', 'Menggunakan data siswa default');
+
+                showCustomModal({
+                    type: 'warning',
+                    title: 'Koneksi Database Bermasalah',
+                    message: `
+                        <div style="text-align: left; margin: 15px 0;">
+                            <strong>Status:</strong> Tidak dapat terhubung ke database<br>
+                            <strong>Penyebab:</strong> ${error.message}<br><br>
+                            <strong>Solusi Sementara:</strong><br>
+                            • Menggunakan data siswa default (${defaultStudents.length} siswa)<br>
+                            • Anda tetap dapat melakukan presensi<br>
+                            • Data akan disinkronkan saat koneksi kembali normal<br><br>
+                            <em>💡 Tip: Periksa koneksi internet dan refresh halaman</em>
+                        </div>
+                    `,
+                    buttons: [
+                        {
+                            text: 'Lanjutkan dengan Data Default',
+                            type: 'primary',
+                            icon: 'fas fa-play',
+                            action: () => {
+                                showRealtimeStatus(false);
+                                showToast('info', 'Mode Offline', 'Menggunakan data siswa default. Data akan disinkronkan otomatis.');
+                            }
+                        },
+                        {
+                            text: 'Coba Lagi',
+                            type: 'secondary',
+                            icon: 'fas fa-refresh',
+                            action: () => {
+                                setTimeout(() => {
+                                    loadStudentsFromDB();
+                                }, 1000);
+                            }
+                        }
+                    ]
+                });
+
                 return students;
             }
         }
@@ -1485,14 +1662,14 @@
         function initSupabaseRealtime() {
             // Create WebSocket connection for realtime
             const wsUrl = `${SUPABASE_URL.replace('https://', 'wss://')}/realtime/v1/websocket?apikey=${SUPABASE_API_KEY}&vsn=1.0.0`;
-            
+
             try {
                 const ws = new WebSocket(wsUrl);
-                
+
                 ws.onopen = () => {
                     console.log('Realtime connected');
                     showRealtimeStatus(true);
-                    
+
                     // Join attendance channel
                     const joinMsg = {
                         topic: 'realtime:public:attendance',
@@ -1505,7 +1682,7 @@
 
                 ws.onmessage = (event) => {
                     const data = JSON.parse(event.data);
-                    
+
                     // Handle realtime updates
                     if (data.event === 'postgres_changes' && data.payload) {
                         handleRealtimeUpdate(data.payload);
@@ -1515,7 +1692,7 @@
                 ws.onclose = () => {
                     console.log('Realtime disconnected');
                     showRealtimeStatus(false);
-                    
+
                     // Reconnect after 5 seconds
                     setTimeout(() => {
                         initSupabaseRealtime();
@@ -1538,12 +1715,12 @@
         // Handle realtime updates
         function handleRealtimeUpdate(payload) {
             console.log('Realtime update:', payload);
-            
+
             if (payload.table === 'attendance') {
                 // Refresh attendance data for current date
                 const currentDate = formatDateForDB(selectedDate);
                 const recordDate = payload.new?.tanggal || payload.old?.tanggal;
-                
+
                 if (recordDate === currentDate) {
                     loadAttendanceForDate(selectedDate);
                     showToast('info', 'Data Diperbarui', 'Data presensi telah diperbarui secara realtime');
@@ -1561,12 +1738,12 @@
         function showRealtimeStatus(connected) {
             const indicator = document.getElementById('realtimeIndicator');
             const text = document.getElementById('realtimeText');
-            
+
             if (connected) {
                 indicator.classList.remove('offline');
                 indicator.classList.add('show');
                 text.textContent = 'Terhubung';
-                
+
                 setTimeout(() => {
                     indicator.classList.remove('show');
                 }, 3000);
@@ -2071,10 +2248,10 @@
 
             try {
                 showLoading('Menambah siswa...');
-                
+
                 // Add to database
                 await addStudentToDB(newName);
-                
+
                 // Save undo data
                 const undoAction = async () => {
                     try {
