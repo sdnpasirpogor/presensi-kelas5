@@ -2770,23 +2770,32 @@
             const thisMonth = String(now.getMonth() + 1).padStart(2, '0');
             const thisYear = now.getFullYear();
 
+            // Range tahun: tahun sekarang sampai 6 tahun ke depan
+            const minYear = thisYear; // Mulai dari tahun sekarang
+            const maxYear = thisYear + 6; // Sampai 6 tahun ke depan (future-proof)
+
             const bulanInputHTML = `
-                <div class="rekap-controls">
-                    <label for="rekapBulan"><b>Pilih Bulan:</b></label>
-                    <select id="rekapBulan">
-                        ${getBulanOptions(thisMonth)}
-                    </select>
-                    <label for="rekapTahun"><b>Tahun:</b></label>
-                    <input type="number" id="rekapTahun" min="2023" max="${thisYear}" value="${thisYear}" style="width:90px;">
-                    <button id="btnCariRekapBulanan" class="action-button rekap-bulanan" style="padding:7px 15px;">
-                        <i class="fas fa-search"></i> Tampilkan
-                    </button>
-                    <button id="btnExportExcel" class="action-button export-excel" style="padding:7px 15px;">
-                        <i class="fas fa-file-excel"></i> Export ke Excel
-                    </button>
-                </div>
-                <div id="rekapBulananResult"></div>
-            `;
+        <div class="rekap-controls">
+            <label for="rekapBulan"><b>Pilih Bulan:</b></label>
+            <select id="rekapBulan">
+                ${getBulanOptions(thisMonth)}
+            </select>
+            <label for="rekapTahun"><b>Tahun:</b></label>
+            <input type="number" id="rekapTahun" 
+                   min="${minYear}" 
+                   max="${maxYear}" 
+                   value="${thisYear}"
+                   step="1"
+                   style="width:90px;">
+            <button id="btnCariRekapBulanan" class="action-button rekap-bulanan" style="padding:7px 15px;">
+                <i class="fas fa-search"></i> Tampilkan
+            </button>
+            <button id="btnExportExcel" class="action-button export-excel" style="padding:7px 15px;">
+                <i class="fas fa-file-excel"></i> Export ke Excel
+            </button>
+        </div>
+        <div id="rekapBulananResult"></div>
+    `;
 
             showRekapModal(`<h2>Rekap Bulanan</h2>${bulanInputHTML}`);
 
@@ -2949,25 +2958,57 @@
             }
         }
 
-        // Fungsi ekspor ke Excel
+        // Function yang sudah diperbaiki dengan validation
         async function exportToExcel() {
-            if (!window.rekapDataForExport || window.rekapDataForExport.length === 0) {
-                showToast('warning', 'Peringatan', 'Tidak ada data untuk diekspor!');
-                return;
-            }
+            // Get current selected values
+            const bulan = document.getElementById('rekapBulan').value;
+            const tahun = document.getElementById('rekapTahun').value;
 
-            showLoading('Membuat file Excel...');
+            // Mapping bulan untuk tampilan
+            const bulanNames = {
+                '01': 'Januari', '02': 'Februari', '03': 'Maret', '04': 'April',
+                '05': 'Mei', '06': 'Juni', '07': 'Juli', '08': 'Agustus',
+                '09': 'September', '10': 'Oktober', '11': 'November', '12': 'Desember'
+            };
 
             try {
-                const { bulan, tahun } = window.rekapBulanTahun;
-                const bulanNames = {
-                    '01': 'Januari', '02': 'Februari', '03': 'Maret', '04': 'April',
-                    '05': 'Mei', '06': 'Juni', '07': 'Juli', '08': 'Agustus',
-                    '09': 'September', '10': 'Oktober', '11': 'November', '12': 'Desember'
-                };
-                const bulanTahun = `${bulanNames[bulan]} ${tahun}`;
+                // Check dulu ada data atau tidak dengan query ke Supabase
+                const startDate = `${tahun}-${bulan}-01`;
+                const endDate = `${tahun}-${bulan}-31`;
 
-                // Buat workbook Excel
+                const response = await fetch(`${SUPABASE_REST_URL}/attendance?tanggal=gte.${startDate}&tanggal=lte.${endDate}&select=id`, {
+                    method: 'GET',
+                    headers: SUPABASE_HEADERS
+                });
+
+                if (!response.ok) {
+                    throw new Error('Gagal memeriksa data');
+                }
+
+                const dataCheck = await response.json();
+                const dataCount = Array.isArray(dataCheck) ? dataCheck.length : 0;
+
+                if (dataCount === 0) {
+                    // Tidak ada data - show warning
+                    showToast('warning', 'Peringatan', `Tidak ada data untuk ${bulanNames[bulan]} ${tahun} yang Anda pilih.\nSilakan pilih bulan dan tahun yang lain.`);
+                    return; // Stop di sini
+                }
+
+                // Ada data - show confirmation
+                const confirmed = confirm(`Export data untuk ${bulanNames[bulan]} ${tahun}\nDitemukan: ${dataCount} records\n\nApakah Anda ingin melanjutkan?`);
+
+                if (!confirmed) {
+                    return; // User cancel
+                }
+
+                // Proceed dengan export - lanjutkan dengan kode yang sudah ada
+                if (!window.rekapDataForExport || window.rekapDataForExport.length === 0) {
+                    showToast('warning', 'Peringatan', 'Tidak ada data untuk diekspor!');
+                    return;
+                }
+
+                showLoading('Membuat file Excel...');
+
                 const wb = XLSX.utils.book_new();
 
                 // =================== SHEET 1: REKAP JUMLAH ===================
@@ -2976,7 +3017,7 @@
                 XLSX.utils.sheet_add_aoa(ws1, [
                     ["SD NEGERI 1 PASIRPOGOR"],
                     ["REKAP BULANAN DAFTAR HADIR SISWA KELAS 5"],
-                    [`BULAN : ${bulanTahun}`],
+                    [`BULAN : ${bulanNames[bulan]} ${tahun}`],
                     [], // Baris kosong
                     [], // Baris kosong
                     ["No", "Nama Siswa", "Hadir", "Izin", "Sakit", "Alfa", "Total", "Persentase"]
@@ -3046,7 +3087,7 @@
                     XLSX.utils.sheet_add_aoa(ws2, [
                         ["SD NEGERI 1 PASIRPOGOR"],
                         ["REKAP BULANAN DAFTAR HADIR SISWA KELAS 5"],
-                        [`BULAN : ${bulanTahun}`],
+                        [`BULAN : ${bulanNames[bulan]} ${tahun}`],
                         [], [], // 2 Baris kosong
                         headerRow
                     ], { origin: "A1" });
@@ -3108,9 +3149,9 @@
                 showToast('success', 'Berhasil!', `File "${fileName}" berhasil diunduh`);
 
             } catch (error) {
-                console.error('Error creating Excel:', error);
+                console.error('Error in export process:', error);
                 hideLoading();
-                showToast('error', 'Error', 'Gagal membuat file Excel. Silakan coba lagi.');
+                showToast('error', 'Error', 'Gagal memproses export. Silakan coba lagi.');
             }
         }
     </script>
